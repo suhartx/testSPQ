@@ -19,6 +19,6 @@ public class Barbarian extends Character {
 	public void display() {
 	// TODO Auto-generated method stub
 		logger.info("+++You are a strong, hulky barbarian!!!.");
-		System.out.println("Modified from AB");
+		System.out.println("Modified from AB!");
 	}
 }
