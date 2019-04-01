@@ -18,6 +18,6 @@ public class Barbarian extends Character {
 	@Override
 	public void display() {
 	// TODO Auto-generated method stub
-		logger.info("You are a strong, hulky barbarian!!!.");
+		logger.info("+++You are a strong, hulky barbarian!!!.");
 	}
 }
