@@ -2,7 +2,7 @@ package game;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+//
 public class Barbarian extends Character {
 	final Logger logger = LoggerFactory.getLogger(Barbarian.class);
 	
