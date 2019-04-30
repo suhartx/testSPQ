@@ -62,7 +62,7 @@ public class MoneyPerfTest {
 		assertEquals(expected, fMB1.multiply(2)); 
 		assertEquals(fMB1, fMB1.multiply(1));
 		assertTrue(fMB1.multiply(0).isZero());
-		Thread.sleep(121);
+		Thread.sleep(21);
 		logger.debug("Finishing testBagMultiply");
 	}
 	@Test public void testBagNegate() {
