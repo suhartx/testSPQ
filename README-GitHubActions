@@ -1,28 +1,31 @@
-1. Update .travis.yml to:
+1. Update maven.yml to:
 
-language: java
-os: linux
-jdk:
-    - openjdk8
-script:
-    - mvn test -DargLine="-Dcontiperf.active=false"
+name: Java CI with Maven
 
-branches:
-    only:
-        - development_junit
-    except:
-        - master
-        - development
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
-2. Execute the following git commands:		
-git branch development_junit
-git checkout development_junit
-git commit -m ".travis.yml updated"
-git push origin development_junit
+jobs:
+  build:
 
-3. Go to Travis CI dashboard:
+    runs-on: ubuntu-latest
 
-https://travis-ci.com/github/
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: Build with Maven
+      run: ls -la && pwd && mvn test -DargLine="-Dcontiperf.active=false"
+
+3. Go to GitHub actions dashboard:
+
+https://github.com/<repo_id>/actions
 
 4. Browse through the builds
 
