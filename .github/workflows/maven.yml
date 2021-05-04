@@ -23,12 +23,12 @@ jobs:
         distribution: 'adopt'   
     - name: Download and install doxygen
       run: wget https://doxygen.nl/files/doxygen-1.9.1.linux.bin.tar.gz && tar -xzf doxygen-1.9.1.linux.bin.tar.gz && export PATH=$PATH:$PWD/doxygen-1.9.1/bin 
-    - name: Test with Maven
-      run: mvn test -DargLine="-Dcontiperf.active=false"
+    #- name: Test with Maven
+    #  run: mvn test -DargLine="-Dcontiperf.active=false"
     - name: Generate documentation
-      run: export PATH=$PATH:$PWD/doxygen-1.9.1/bin && mvn doxygen:report
-    - name: Move report to docs folder
-      run: mvn validate
+      run: export PATH=$PATH:$PWD/doxygen-1.9.1/bin && sudo mvn doxygen:report
+    #- name: Move report to docs folder
+    #  run: mvn validate
     - name: Publish on Github Pages
       uses: crazy-max/ghaction-github-pages@v2.3.0
       with:
