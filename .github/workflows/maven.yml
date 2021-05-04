@@ -22,7 +22,6 @@ jobs:
         java-version: '11'
         distribution: 'adopt'   
     - name: Download and install doxygen
-      run: mkdir widoco && wget -O widoco/widoco.jar https://github.com/dgarijo/Widoco/releases/download/v1.4.14/widoco-1.4.14-jar-with-dependencies.jar     
       run: git clone https://github.com/doxygen/doxygen.git && cd doxygen && mkdir build && cd build && cmake -G "Unix Makefiles" .. && make     
     #- name: Set up Doxygen   
     #  uses: mattnotmitt/doxygen-action@v1
