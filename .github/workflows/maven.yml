@@ -22,11 +22,11 @@ jobs:
         java-version: '11'
         distribution: 'adopt'   
     - name: Download and install doxygen
-      run: wget https://doxygen.nl/files/doxygen-1.9.1.linux.bin.tar.gz && tar -xzf doxygen-1.9.1.linux.bin.tar.gz && sudo export PATH=$PATH:$PWD/doxygen-1.9.1/bin 
+      run: wget https://doxygen.nl/files/doxygen-1.9.1.linux.bin.tar.gz && tar -xzf doxygen-1.9.1.linux.bin.tar.gz && export PATH=$PATH:$PWD/doxygen-1.9.1/bin 
     - name: Test with Maven
-      run: sudo mvn test -DargLine="-Dcontiperf.active=false"
+      run: mvn test -DargLine="-Dcontiperf.active=false"
     - name: Generate documentation
-      run: pwd && ls -la && sudo mvn doxygen:report
+      run: export PATH=$PATH:$PWD/doxygen-1.9.1/bin && mvn doxygen:report
     - name: Move report to docs folder
       run: mvn validate
     - name: Publish on Github Pages
