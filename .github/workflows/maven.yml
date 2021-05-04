@@ -29,5 +29,7 @@ jobs:
       run: mvn test -DargLine="-Dcontiperf.active=false"
     - name: Generate documentation
       run: pwd && ls -la && pwd && mvn doxygen:report
+      with:
+        doxyfile-path: 'src/main/resources'
     - name: Move report to docs folder
       run: mvn validate
