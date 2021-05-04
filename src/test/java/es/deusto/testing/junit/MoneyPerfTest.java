@@ -16,23 +16,47 @@ import org.databene.contiperf.PerfTest;
 import org.databene.contiperf.junit.ContiPerfRule;
 import org.databene.contiperf.report.EmptyReportModule;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+//import org.apache.log4j.Logger;
+//import org.apache.log4j.PropertyConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+/**
+ * @author      Diego López de Ipiña &lt;dipina@deusto.es&gt;
+ * @version     1.0                                    
+ * @since       2012-03-24          
+ * <p>This program tests all the functionality of a money handling system. It operates over the Money and MoneyBag instances. All the methods in this class except testBagMultiply() are executed 5 times. Furhermore, they all must be executed within 1.2 seconds and with an average speed of 250 milliseconds. </p> 
+ *
+ */
+ 
 @PerfTest(invocations = 5)
 @Required(max = 1200, average = 250)
 public class MoneyPerfTest {
+	/**
+	 * This variable represents 12 swiss francs
+	 */
 	private Money f12CHF;
+	/**
+	 * This variable represents 14 swiss francs
+	 */
 	private Money f14CHF;
+	/**
+	 * This variable represents 7 USA dollars
+	 */
 	private Money f7USD;
-	private Money f21USD;
-
-	private IMoney fMB1;
-	private IMoney fMB2;
+	/**
+	 * This variable represents 21 USA dollars
+	 */
+	private Money f21USD; 
 	
-	static Logger logger = Logger.getLogger(MoneyPerfTest.class.getName());
+	public IMoney fMB1; /** This variable has any type of IMoney */
+	public IMoney fMB2; /** This variable has any type of IMoney */
+	
+	//static Logger logger = Logger.getLogger(MoneyPerfTest.class.getName());
+	final Logger logger = LoggerFactory.getLogger(MoneyPerfTest.class);
+	static int iteration = 0;
 
-	// If you use the EmptyReportModule, the report is not generated
+	// If you use the EmptyReportModule, this is not generated
 	//@Rule public ContiPerfRule rule = new ContiPerfRule(new EmptyReportModule());
 	@Rule public ContiPerfRule rule = new ContiPerfRule();
 	
@@ -40,8 +64,12 @@ public class MoneyPerfTest {
 		 return new JUnit4TestAdapter(MoneyPerfTest.class);
 	}
 
+	/**
+	 * This method is executed before any JUnit test method is executed: It is annotated with the Before annotation. Since we are using ContiPerf if a method is run 100 times, only this method will be executed the first time. 
+	*/
 	@Before public void setUp() {
-		logger.info("Entering setUp");
+		//logger.info("Entering setUp");
+		logger.info("Entering setUp: {}", iteration++);
 		f12CHF= new Money(12, "CHF");
 		f14CHF= new Money(14, "CHF");
 		f7USD= new Money( 7, "USD");
@@ -52,9 +80,12 @@ public class MoneyPerfTest {
 		logger.info("Leaving setUp");
 	}
 	
+	/**
+	 * This method is executed 1000 times through 20 threads. Waht it does is to create a bag of Money mixing swiss francs with USA dollars. Then it performs several operations over them . It has to run in less that 120 milliseconds and with an average response time of 30 milliseconds. 
+	*/
 	@Test 
     @PerfTest(invocations = 1000, threads = 20)
-    @Required(max = 120, average = 30)
+    @Required(max = 1200, average = 300)
 	public void testBagMultiply() throws Exception {
 		logger.info("Starting testBagMultiply");
 		// {[12 CHF][7 USD]} *2 == {[24 CHF][14 USD]}
@@ -62,7 +93,7 @@ public class MoneyPerfTest {
 		assertEquals(expected, fMB1.multiply(2)); 
 		assertEquals(fMB1, fMB1.multiply(1));
 		assertTrue(fMB1.multiply(0).isZero());
-		Thread.sleep(21);
+		Thread.sleep(0);
 		logger.debug("Finishing testBagMultiply");
 	}
 	@Test public void testBagNegate() {

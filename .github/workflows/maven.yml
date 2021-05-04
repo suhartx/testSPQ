@@ -21,5 +21,9 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
-    - name: Build with Maven
-      run: ls -la && pwd && mvn test -DargLine="-Dcontiperf.active=false"
+    - name: Test with Maven
+      run: mvn test -DargLine="-Dcontiperf.active=false"
+    - name: Generate documentation
+      run: mvn doxygen:report
+    - name: Move report to docs folder
+      run: mvn validate
