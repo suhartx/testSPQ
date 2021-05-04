@@ -22,7 +22,7 @@ jobs:
         java-version: '11'
         distribution: 'adopt'   
     - name: Download and install doxygen
-      run: wget https://doxygen.nl/files/doxygen-1.9.1.linux.bin.tar.gz && tar -xzf doxygen-1.9.1.linux.bin.tar.gz && cd doxygen-1.9.1 && make && sudo make install
+      run: wget https://doxygen.nl/files/doxygen-1.9.1.linux.bin.tar.gz && tar -xzf doxygen-1.9.1.linux.bin.tar.gz && sudo export $PATH=$PATH:doxygen-1.9.1/bin
 
     - name: Test with Maven
       run: sudo mvn test -DargLine="-Dcontiperf.active=false"
