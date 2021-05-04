@@ -21,12 +21,13 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
+    - name: Test with Maven
+      run: mvn test -DargLine="-Dcontiperf.active=false"    
     - name: Set up Doxygen   
       uses: mattnotmitt/doxygen-action@v1
       with:
+        working-directory: './'
         doxyfile-path: 'src/main/resources'
-    - name: Test with Maven
-      run: mvn test -DargLine="-Dcontiperf.active=false"    
     - name: Generate documentation
       run: mvn doxygen:report
     - name: Move report to docs folder
