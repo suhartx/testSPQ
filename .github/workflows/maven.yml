@@ -28,6 +28,6 @@ jobs:
     - name: Test with Maven
       run: mvn test -DargLine="-Dcontiperf.active=false"
     - name: Generate documentation
-      run: mvn doxygen:report
+      run: pwd && cd .. && pwd && mvn doxygen:report
     - name: Move report to docs folder
       run: mvn validate
