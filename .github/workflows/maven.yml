@@ -22,12 +22,15 @@ jobs:
         java-version: '11'
         distribution: 'adopt'   
     - name: Download and install doxygen
-      run: wget https://doxygen.nl/files/doxygen-1.9.1.linux.bin.tar.gz && tar -xzf doxygen-1.9.1.linux.bin.tar.gz && cd doxygen-1.9.1 && ./configure && make && sudo make install
-    #  run: git clone https://github.com/doxygen/doxygen.git && cd doxygen && mkdir build && cd build && cmake -G "Unix #Makefiles" .. && make     
-    #- name: Set up Doxygen   
-    #  uses: mattnotmitt/doxygen-action@v1
-    #  with:
-    #    doxyfile-path: './src/main/resources'
+      run: wget https://doxygen.nl/files/doxygen-1.9.1.linux.bin.tar.gz && tar -xzf doxygen-1.9.1.linux.bin.tar.gz && cd doxygen-1.9.1 && make && sudo make install
+
+
+tar -xzf archive-name.tar.gz
+cd archive-name
+./configure
+make
+sudo make install
+
     - name: Test with Maven
       run: sudo mvn test -DargLine="-Dcontiperf.active=false"
     - name: Generate documentation
