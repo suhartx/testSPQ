@@ -27,6 +27,9 @@ jobs:
         doxyfile-path: 'src/main/resources'
     - name: Test with Maven
       run: mvn test -DargLine="-Dcontiperf.active=false"
+    # Runs a single command using the runners shell
+    - name: Ensure docs dir exists
+      run: mkdir docs
     - name: Generate documentation
       run: mvn doxygen:report
     - name: Move report to docs folder
