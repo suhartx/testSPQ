@@ -20,14 +20,23 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: '11'
-        distribution: 'adopt'    
-    - name: Set up Doxygen   
-      uses: mattnotmitt/doxygen-action@v1
-      with:
-        doxyfile-path: 'src/main/resources'
+        distribution: 'adopt'   
+    - name: Download and install doxygen
+      run: mkdir widoco && wget -O widoco/widoco.jar https://github.com/dgarijo/Widoco/releases/download/v1.4.14/widoco-1.4.14-jar-with-dependencies.jar     
+      run: git clone https://github.com/doxygen/doxygen.git && cd doxygen && mkdir build && cd build && cmake -G "Unix Makefiles" .. && make     
+    #- name: Set up Doxygen   
+    #  uses: mattnotmitt/doxygen-action@v1
+    #  with:
+    #    doxyfile-path: './src/main/resources'
     - name: Test with Maven
       run: mvn test -DargLine="-Dcontiperf.active=false"
     - name: Generate documentation
       run: pwd && ls -la && mvn doxygen:report
     - name: Move report to docs folder
       run: mvn validate
+    - name: Publish on Github Pages
+      uses: crazy-max/ghaction-github-pages@v2.3.0
+      with:
+        build_dir: target/doxygen 
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
