@@ -27,7 +27,7 @@ jobs:
         doxyfile-path: 'src/main/resources'
     - name: Test with Maven
       run: mvn test -DargLine="-Dcontiperf.active=false"
-    # Runs a single command using the runners shell
+    # Ensure that there is a docs folder in the repo
     - name: Ensure docs dir exists
       run: mkdir docs
     - name: Generate documentation
