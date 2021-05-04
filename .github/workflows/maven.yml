@@ -26,10 +26,7 @@ jobs:
       with:
         doxyfile-path: 'src/main/resources'
     - name: Test with Maven
-      run: mvn test -DargLine="-Dcontiperf.active=false"
-    # Ensure that there is a docs folder in the repo
-    - name: Ensure docs dir exists
-      run: mkdir docs
+      run: mvn test -DargLine="-Dcontiperf.active=false"    
     - name: Generate documentation
       run: mvn doxygen:report
     - name: Move report to docs folder
