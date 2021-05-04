@@ -26,7 +26,7 @@ jobs:
     - name: Set up Doxygen   
       uses: mattnotmitt/doxygen-action@v1
       with:
-        working-directory: './'
+        working-directory: '../'
         doxyfile-path: 'src/main/resources'
     - name: Generate documentation
       run: mvn doxygen:report
