@@ -24,9 +24,7 @@ jobs:
     - name: Set up Doxygen   
       uses: mattnotmitt/doxygen-action@v1
       with:
-        working-directory: 'submodule/'
-        doxyfile-path: 'docs/Doxygen'
-        enable-latex: true
+        doxyfile-path: 'src/main/resources'
     - name: Test with Maven
       run: mvn test -DargLine="-Dcontiperf.active=false"
     - name: Generate documentation
