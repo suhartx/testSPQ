@@ -32,5 +32,8 @@ jobs:
       run: mkdir docs
     - name: Generate documentation
       run: mvn doxygen:report
-    - name: Move report to docs folder
-      run: mvn validate
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@4.1.1
+      with:
+        branch: docs # The branch the action should deploy to.
+        folder: target/doxygen # The folder the action should deploy.
