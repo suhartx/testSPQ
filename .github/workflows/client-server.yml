@@ -23,12 +23,12 @@ jobs:
     #  run: sudo apt-get install -y doxygen
     #- name: Install graphviz
     #  run: sudo apt-get install -y graphviz
-    - name: Install mysqlserver
-      run: sudo apt install mysql-server
-    - name: Sleep for 10 seconds
-      uses: jakejarvis/wait-action@master
-      with:
-        time: '30s'
+    #- name: Install mysqlserver
+    #  run: sudo apt install mysql-server
+    #- name: Sleep for 10 seconds
+    #  uses: jakejarvis/wait-action@master
+    #  with:
+    #    time: '30s'
     - name: create database in mysql-server
       run: sudo mysql src/sql/create-messagesdb.sql    
     - name: compile the code
