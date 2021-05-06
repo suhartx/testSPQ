@@ -29,8 +29,12 @@ jobs:
     #  uses: jakejarvis/wait-action@master
     #  with:
     #    time: '30s'
+    - uses: shogo82148/actions-setup-mysql@v1
+      with:
+        mysql-version: '8.0'
+    - run: mysql -uroot -h127.0.0.1 -e 'SELECT version()'
     - name: create database in mysql-server
-      run: sudo mysql src/sql/create-messagesdb.sql    
+      run: mysql -uroot -h127.0.0.1 < src/sql/create-messagesdb.sql  
     - name: compile the code
       run: mvn clean compile
     - name: Create Datanucleus schema
