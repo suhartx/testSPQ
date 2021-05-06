@@ -1,0 +1,51 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Java CI with Maven, tests and documentation generation
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'   
+    - name: Install doxygen
+      run: sudo apt-get install -y doxygen
+    - name: Install graphviz
+      run: sudo apt-get install -y graphviz
+    - name: Install mysqlserver
+      run: sudo apt install mysql-server
+    - name: create database in mysql-server
+      run: sudo mysql src/sql/create-messagesdb.sql    
+    - name: compile the code
+      run: mvn clean compile
+    - name: Create Datanucleus schema
+      run: mvn datanucleus:schema-create
+    - name: Launch the server
+      run: mvn jetty:run &
+    - name: Sleep for 30 seconds
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '10s'
+    - name: Launch the client
+      run: mvn exec:java -Pclient
+    #- name: Test with Maven
+    #  run: mvn test -DargLine="-Dcontiperf.active=false"
+    #- name: Generate documentation
+    #  run: mvn doxygen:report
+    #- name: Publish on Github Pages
+    #  uses: crazy-max/ghaction-github-pages@v2.3.0
+    #  with:
+    #    build_dir: target/doxygen/html
+    #  env:
+    #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
