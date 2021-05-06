@@ -19,20 +19,14 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'   
-    #- name: Install doxygen
-    #  run: sudo apt-get install -y doxygen
-    #- name: Install graphviz
-    #  run: sudo apt-get install -y graphviz
-    #- name: Install mysqlserver
-    #  run: sudo apt install mysql-server
-    #- name: Sleep for 10 seconds
-    #  uses: jakejarvis/wait-action@master
-    #  with:
-    #    time: '30s'
+    - name: Install doxygen
+      run: sudo apt-get install -y doxygen
+    - name: Install graphviz
+      run: sudo apt-get install -y graphviz
+    # install mysqld
     - uses: shogo82148/actions-setup-mysql@v1
       with:
         mysql-version: '8.0'
-    - run: mysql -uroot -h127.0.0.1 -e 'SELECT version()'
     - name: create database in mysql-server
       run: mysql -uroot -h127.0.0.1 < src/sql/create-messagesdb.sql  
     - name: compile the code
