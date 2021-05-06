@@ -28,7 +28,7 @@ jobs:
     - name: Sleep for 10 seconds
       uses: jakejarvis/wait-action@master
       with:
-        time: '10s'
+        time: '30s'
     - name: create database in mysql-server
       run: sudo mysql src/sql/create-messagesdb.sql    
     - name: compile the code
