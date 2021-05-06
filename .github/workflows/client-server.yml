@@ -19,11 +19,6 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'   
-    - name: Install doxygen
-      run: sudo apt-get install -y doxygen
-    - name: Install graphviz
-      run: sudo apt-get install -y graphviz
-    # install mysqld
     - uses: shogo82148/actions-setup-mysql@v1
       with:
         mysql-version: '8.0'
@@ -33,7 +28,7 @@ jobs:
       run: mvn clean compile
     - name: Create Datanucleus schema
       run: mvn datanucleus:schema-create
-    - name: Launch the server
+    - name: Launch the server in background mode 
       run: mvn jetty:run &
     - name: Sleep for 10 seconds
       uses: jakejarvis/wait-action@master
@@ -43,6 +38,10 @@ jobs:
       run: mvn exec:java -Pclient
     - name: Test with Maven
       run: mvn test -DargLine="-Dcontiperf.active=false"
+    - name: Install doxygen
+      run: sudo apt-get install -y doxygen
+    - name: Install graphviz
+      run: sudo apt-get install -y graphviz
     - name: Generate documentation
       run: mvn doxygen:report
     - name: Publish on Github Pages
@@ -51,3 +50,4 @@ jobs:
         build_dir: target/doxygen/html
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
