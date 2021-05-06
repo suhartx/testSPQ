@@ -41,13 +41,13 @@ jobs:
         time: '10s'
     - name: Launch the client
       run: mvn exec:java -Pclient
-    #- name: Test with Maven
-    #  run: mvn test -DargLine="-Dcontiperf.active=false"
-    #- name: Generate documentation
-    #  run: mvn doxygen:report
-    #- name: Publish on Github Pages
-    #  uses: crazy-max/ghaction-github-pages@v2.3.0
-    #  with:
-    #    build_dir: target/doxygen/html
-    #  env:
-    #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Test with Maven
+      run: mvn test -DargLine="-Dcontiperf.active=false"
+    - name: Generate documentation
+      run: mvn doxygen:report
+    - name: Publish on Github Pages
+      uses: crazy-max/ghaction-github-pages@v2.3.0
+      with:
+        build_dir: target/doxygen/html
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
