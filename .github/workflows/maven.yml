@@ -21,6 +21,8 @@ jobs:
         distribution: 'adopt'   
     - name: Install doxygen
       run: sudo apt-get install -y doxygen
+    - name: Install graphviz
+      run: sudo apt-get install -y graphviz
     - name: Test with Maven
       run: mvn test -DargLine="-Dcontiperf.active=false"
     - name: Generate documentation
