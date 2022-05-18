@@ -14,7 +14,7 @@ import es.deusto.serialization.MessageData;
 import es.deusto.serialization.UserData;
 
 public class ExampleClient {
-
+//aer si tira esto
 	private Client client;
 	private WebTarget webTarget;
 
